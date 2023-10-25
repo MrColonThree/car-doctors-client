@@ -22,14 +22,14 @@ const SignUp = () => {
           setUser((currentUser) => {
             currentUser.displayName = name;
             e.target.reset();
-            navigate("/");
-            return Swal.fire({
+            Swal.fire({
               position: "top-end",
               icon: "success",
               title: "User created successfully!",
               showConfirmButton: false,
               timer: 1000,
             });
+            navigate("/");
           });
         });
       })
