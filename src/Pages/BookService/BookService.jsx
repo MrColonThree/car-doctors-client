@@ -26,7 +26,7 @@ const BookService = () => {
       price: due,
     };
     console.log(order);
-    fetch("http://localhost:7000/bookings", {
+    fetch("https://car-doctor-server-ashy-sigma.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

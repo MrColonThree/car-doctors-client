@@ -1,18 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
-  const url = `http://localhost:7000/bookings?email=${user?.email}`;
+  const axiosSecure = useAxiosSecure();
+  // const url = `https://car-doctor-server-ashy-sigma.vercel.app/bookings?email=${user?.email}`;
+  const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setBookings(data));
-  }, [url]);
+    axiosSecure.get(url).then((res) => setBookings(res.data));
+    // fetch(url, { credentials: "include" })
+    //   .then((res) => res.json())
+    //   .then((data) => setBookings(data));
+  }, [url, axiosSecure]);
   const handleDelete = (id) => {
-    fetch(`http://localhost:7000/bookings/${id}`, {
+    fetch(`https://car-doctor-server-ashy-sigma.vercel.app/bookings/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -26,7 +30,7 @@ const Bookings = () => {
   };
 
   const handleConfirm = (id) => {
-    fetch(`http://localhost:7000/bookings/${id}`, {
+    fetch(`https://car-doctor-server-ashy-sigma.vercel.app/bookings/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -112,7 +116,7 @@ const Bookings = () => {
                       onClick={() => handleConfirm(item._id)}
                       className="btn btn-info btn-sm"
                     >
-                     Please Confirm
+                      Please Confirm
                     </button>
                   )}
                 </th>

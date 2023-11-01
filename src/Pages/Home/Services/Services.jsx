@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
 import { Link } from "react-router-dom";
+import useServices from "../../../Hooks/useServices";
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:7000/services")
-      .then((res) => res.json())
-      .then((data) => setServices(data));
-  }, []);
+  const services = useServices();
+  // const [services, setServices] = useState([]);
+  // useEffect(() => {
+  //   fetch("https://car-doctor-server-ashy-sigma.vercel.app/services")
+  //     .then((res) => res.json())
+  //     .then((data) => setServices(data));
+  // }, []);
   return (
     <div className="my-10 lg:-mt-40 px-5">
       <div className="text-center space-y-5">
